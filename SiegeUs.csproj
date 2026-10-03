@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AssemblyName>SiegeUs</AssemblyName>
+    <RootNamespace>SiegeUs</RootNamespace>
+    <Version>0.1.0</Version>
+    <DebugType>embedded</DebugType>
+    <!-- Override on the command line: dotnet build -p:AmongUsDir="D:\Games\Among Us" -->
+    <AmongUsDir Condition="'$(AmongUsDir)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Among Us</AmongUsDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Matches the Thunderstore dependency BepInEx-BepInExPack_AmongUs-6.0.700 -->
+    <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.700" IncludeAssets="compile" PrivateAssets="all" />
+    <!-- Game interop assemblies. Floating on purpose: always compile against the newest published game version. -->
+    <PackageReference Include="AmongUs.GameLibs.Steam" Version="*" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="maps\oregon.json" LogicalName="SiegeUs.maps.oregon.json" />
+  </ItemGroup>
+
+  <Target Name="CopyToGame" AfterTargets="Build" Condition="Exists('$(AmongUsDir)\BepInEx\plugins')">
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(AmongUsDir)\BepInEx\plugins" />
+  </Target>
+</Project>
