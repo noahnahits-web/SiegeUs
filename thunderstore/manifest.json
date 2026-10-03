@@ -1,0 +1,9 @@
+{
+  "name": "SiegeUs",
+  "version_number": "0.1.0",
+  "website_url": "",
+  "description": "Rainbow Six Siege-style top-down tactical mode for Among Us: attackers vs defenders, 70+ operators, 100+ guns, destructible walls and floors, Oregon map. First to 8 rounds.",
+  "dependencies": [
+    "BepInEx-BepInExPack_AmongUs-6.0.700"
+  ]
+}
